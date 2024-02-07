@@ -1,3 +1,6 @@
+#ifndef NFL_ALIGNED_ALLOCATOR_HPP
+#define NFL_ALIGNED_ALLOCATOR_HPP
+
 
 /*
  * Aligned memory allocator
@@ -119,3 +122,5 @@ inline void aligned_allocator<T, N>::deallocate(pointer p, size_type) {
 }
 
 }
+
+#endif

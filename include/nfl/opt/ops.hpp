@@ -1,3 +1,6 @@
+#ifndef NFL_OPT_OPS_HPP
+#define NFL_OPT_OPS_HPP
+
 namespace nfl {
 
 namespace ops {
@@ -82,3 +85,5 @@ T operator()(T rop, T x, T y, T yprime, size_t cm) const
 } // ops
 
 } // nfl
+
+#endif // NFL_OPT_OPS_HPP

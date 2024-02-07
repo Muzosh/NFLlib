@@ -113,7 +113,7 @@ class FastGaussianNoise {
 
 // HELPER FUNCTIONS
 
-uint64_t rdtsc() 
+extern __inline__ uint64_t rdtsc() 
 {
   auto now = std::chrono::high_resolution_clock::now().time_since_epoch();
   return static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
@@ -499,7 +499,7 @@ void FastGaussianNoise<in_class, out_class, _lu_depth>::getNoise(out_class* cons
  
   // Count time for uniform noise generation 
 	uint64_t start = rdtsc();
-	fastrandombytes((uint8_t*)noise, innoise_bytesize);
+	randombytes((uint8_t*)noise, innoise_bytesize);
 	uint64_t stop = rdtsc();
 
   // Give some feedback
@@ -585,7 +585,7 @@ void FastGaussianNoise<in_class, out_class, _lu_depth>::getNoise(out_class* cons
       used_words = 0; 
       if (_verbose) std::cout << "FastGaussianNoise: All the input bits have been used, regenerating them ..." << std::endl;
  
-	    fastrandombytes((uint8_t*)noise, innoise_bytesize);
+	    randombytes((uint8_t*)noise, innoise_bytesize);
     }
 #endif
 	}

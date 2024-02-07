@@ -35,6 +35,7 @@ find_package(GMP REQUIRED)
 find_package(MPFR REQUIRED)
 
 include_directories(include include/nfl include/nfl/arch include/nfl/opt include/nfl/opt/arch include/nfl/prng)
+include_directories(/opt/homebrew/include)
 
 
 file(GLOB NFLLIB_ASMS lib/prng/*.s)
