@@ -3,7 +3,11 @@
 
 #include "nfl/arch/common.hpp"
 #include "nfl/algos.hpp"
-#include <pmmintrin.h>
+#if defined(__i386__) || defined(__x86_64__)
+#include <immintrin.h>
+#elif defined(__ARM_FEATURE_SIMD32) || defined(__ARM_NEON)
+ #include <arm_neon.h>
+#endif
 #include "nfl/arch/common.hpp"
 #include <iostream>
 

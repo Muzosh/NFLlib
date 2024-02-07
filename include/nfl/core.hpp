@@ -153,7 +153,7 @@ void poly<T, Degree, NbModuli>::set(uniform const &) {
   assert((unsigned long)(this->_data) % 32 == 0);
 
   // In uniform mode we need randomness for all the polynomials in the CRT
-  fastrandombytes((unsigned char *)data(), sizeof(poly));
+  randombytes((unsigned char *)data(), sizeof(poly));
 
   for (unsigned int cm = 0; cm < nmoduli; cm++) {
     // In the uniform case, instead of getting a big random (within the general
@@ -210,7 +210,7 @@ void poly<T, Degree, NbModuli>::set(non_uniform const& mode) {
   value_type rnd[degree];
 
   // Get some randomness from the PRNG
-  fastrandombytes((unsigned char *)rnd, sizeof(rnd));
+  randombytes((unsigned char *)rnd, sizeof(rnd));
 
   // upper_bound is below the moduli so we create the same mask for all the
   // moduli
@@ -333,7 +333,7 @@ poly<T, Degree, NbModuli>::poly(ZO_dist const& mode) {
 template<class T, size_t Degree, size_t NbModuli>
 void poly<T, Degree, NbModuli>::set(ZO_dist const& mode) {
   uint8_t rnd[Degree];
-  fastrandombytes(rnd, sizeof(rnd));
+  randombytes(rnd, sizeof(rnd));
   value_type *ptr = &_data[0];
   for (size_t cm = 0; cm < NbModuli; ++cm) {
     const T pm = params<T>::P[cm] - 1u;
@@ -365,7 +365,7 @@ void poly<T, Degree, NbModuli>::set(hwt_dist const& mode) {
     for (;;) {
       if (rnd_ptr == rnd_end)
       {
-        fastrandombytes((unsigned char *)rnd.data(), rnd.size() * sizeof(size_t));
+        randombytes((unsigned char *)rnd.data(), rnd.size() * sizeof(size_t));
         rnd_ptr = rnd.begin();
       }
       pos = *rnd_ptr++;
@@ -380,7 +380,7 @@ void poly<T, Degree, NbModuli>::set(hwt_dist const& mode) {
 
   std::sort(hitted.begin(), hitted.end()); // for better locality ?
   std::memset(_data, 0x0, N * sizeof(value_type)); // clear up all
-  fastrandombytes((unsigned char *)rnd.data(), rnd.size() * sizeof(size_t));
+  randombytes((unsigned char *)rnd.data(), rnd.size() * sizeof(size_t));
   for (size_t cm = 0, offset = 0; cm < NbModuli; ++cm, offset += degree) {
     const T pm = params<T>::P[cm] - 1u;
     rnd_ptr = rnd.begin();

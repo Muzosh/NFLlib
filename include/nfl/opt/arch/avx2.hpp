@@ -1,7 +1,10 @@
 #ifndef DEF_NFLImplems_avx2
 #define DEF_NFLImplems_avx2
-
+#if defined(__i386__) || defined(__x86_64__)
 #include <immintrin.h>
+#elif defined(__ARM_FEATURE_SIMD32) || defined(__ARM_NEON)
+ #include <arm_neon.h>
+#endif
 #include "nfl/opt/arch/sse.hpp"
 
 namespace nfl {

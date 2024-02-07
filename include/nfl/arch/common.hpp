@@ -1,7 +1,10 @@
 #ifndef NFL_ARCH_COMMON_HPP
 #define NFL_ARCH_COMMON_HPP
-
+#if defined(__i386__) || defined(__x86_64__)
 #include <immintrin.h>
+#elif defined(__ARM_FEATURE_SIMD32) || defined(__ARM_NEON)
+ #include <arm_neon.h>
+#endif
 #include <utility>
 
 namespace nfl {

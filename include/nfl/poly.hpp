@@ -25,7 +25,7 @@
 #include "nfl/params.hpp"
 #include "nfl/ops.hpp"
 #include "nfl/arch.hpp"
-#include "nfl/prng/fastrandombytes.h"
+#include "nfl/prng/randombytes.h"
 #include "nfl/prng/FastGaussianNoise.hpp"
 
 #include <iostream>

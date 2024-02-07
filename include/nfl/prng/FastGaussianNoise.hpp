@@ -14,7 +14,7 @@
 #include <typeinfo>
 #include <gmp.h>
 #include <mpfr.h>
-#include "fastrandombytes.h"
+#include "randombytes.h"
 
 #ifdef BOOST_RAPHSON
 #include <boost/math/tools/roots.hpp>
@@ -113,12 +113,10 @@ class FastGaussianNoise {
 
 // HELPER FUNCTIONS
 
-/* /!\ Warning only for x64 */
-extern __inline__ uint64_t rdtsc(void) 
+uint64_t rdtsc() 
 {
-  uint64_t a, d;
-  __asm__ volatile ("rdtsc" : "=a" (a), "=d" (d));
-  return (d<<32) | a;
+  auto now = std::chrono::high_resolution_clock::now().time_since_epoch();
+  return static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
 }
 
 // Function to be used in a Newton-Raphson solver
